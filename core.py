@@ -72,10 +72,11 @@ class VkTools():
         age = curent_year - user_year
         age_from = age - 5
         age_to = age + 5
+        offset = 0
 
         users = self.api.method('users.search',
                                 {'count': 10,
-                                 'offset': 0,
+                                 'offset': offset,
                                  'age_from': age_from,
                                  'age_to': age_to,
                                  'sex': sex,
@@ -97,6 +98,7 @@ class VkTools():
                             'name': user['first_name'] + ' ' + user['last_name']
                            }
                            )
+        offset += 10
         
         return res
 

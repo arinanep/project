@@ -20,7 +20,7 @@ class BotInterface():
                                 {'user_id': user_id,
                                 'message': message,
                                 'attachment': attachment,
-                                'random_id': get_random_id()
+                                'random_id': get_random_id(),
                                 }
                                 )
         
@@ -38,7 +38,12 @@ class BotInterface():
                 elif command == 'поиск':
                     users = self.api.serch_users(self.params)
                     user = users.pop()
-                    find_in_db(user['id'])
+                    result = find_in_db(user['id'])
+                    if result == True:
+                        while result == True:
+                            users = self.api.serch_users(self.params)
+                            user = users.pop()
+                            result = find_in_db(user['id'])
                     photos_user = self.api.get_photos(user['id'])                  
                     
                     attachment = ''

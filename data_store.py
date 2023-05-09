@@ -30,4 +30,8 @@ def find_in_db(user_profile_id):
     with Session(engine) as session:
         from_bd = session.query(Viewed).filter(Viewed.profile_id==user_profile_id).all()
         for item in from_bd:
-            print(item.worksheet_id)
+            if item.profile_id == user_profile_id:
+                return True
+            else:
+                return False
+
